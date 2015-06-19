@@ -21,7 +21,7 @@ class exocClient {
      */
     protected $pl;
 
-    const DEBUG = false;
+    const DEBUG = true;
 
     /**
      * @param exocApp $exocApp
@@ -83,13 +83,14 @@ class exocClient {
      * @throws ilCloudException
      */
     public function deliverFile($path) {
-        $path = substr($path, 1);
+        $path = rawurlencode($path);
         $response = $this->getSabreClient()->request('GET', $path);
         if(self::DEBUG){
             global $log;
             $log->write("[exocClient]->deliverFile({$path}) | response status Code: {$response['statusCode']}");
         }
-        $file_name = substr($path, strrpos($path, '/'));
+        $path = rawurldecode($path);
+        $file_name = pathinfo($path, PATHINFO_FILENAME);
 
         header("Content-type: application/octet-stream");
         header('Content-Description: File Transfer');
@@ -110,7 +111,8 @@ class exocClient {
      * @return bool
      */
     public function createFolder($path) {
-        $path = substr($path, 1);
+        $path = rawurlencode($path);
+
         $response = $this->getSabreClient()->request('MKCOL', $path);
         if(self::DEBUG){
             global $log;
@@ -128,7 +130,7 @@ class exocClient {
      * @throws ilCloudException
      */
     public function uploadFile($location, $local_file_path) {
-        $location = substr($location, 1);
+        $location = rawurlencode($location);
         if($this->fileExists($location)){
             $basename = pathinfo($location, PATHINFO_FILENAME);
             $extension = pathinfo($location, PATHINFO_EXTENSION);
@@ -153,7 +155,7 @@ class exocClient {
      * @return bool
      */
     public function delete($path) {
-        $response = $this->getSabreClient()->request('DELETE', substr($path, 1));
+        $response = $this->getSabreClient()->request('DELETE', rawurlencode($path));
         if(self::DEBUG){
             global $log;
             $log->write("[exocClient]->delete({$path}) | response status Code: {$response['statusCode']}");
@@ -168,7 +170,7 @@ class exocClient {
      * @return bool
      */
     protected function itemExists($path) {
-        $request = $this->getSabreClient()->request('GET', $path);
+        $request = $this->getSabreClient()->request('GET', rawurlencode($path));
         if($request['statusCode'] < 400){
             return true;
         }

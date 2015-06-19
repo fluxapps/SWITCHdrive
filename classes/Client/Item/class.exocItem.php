@@ -57,6 +57,7 @@ abstract class exocItem {
      * @param $properties array
      */
     public function loadFromProperties($web_url, $properties, $parent_id) {
+        $web_url = rawurldecode($web_url);
         $this->setId($properties["{http://owncloud.org/ns}id"]);
         $this->setParentId($parent_id);
         $this->setWebUrl($web_url);
