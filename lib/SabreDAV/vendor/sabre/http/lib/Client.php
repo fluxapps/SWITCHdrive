@@ -395,6 +395,9 @@ class Client extends EventEmitter {
     protected function createCurlSettingsArray(RequestInterface $request) {
 
         $settings = $this->curlSettings;
+        $settings[CURLOPT_SSLVERSION] = 1;
+        $settings[CURLOPT_SSL_VERIFYPEER] = false;
+        $settings[CURLOPT_SSL_VERIFYHOST] = 2;
 
         switch ($request->getMethod()) {
             case 'HEAD' :
