@@ -1,6 +1,5 @@
 <?php
 require_once('./Modules/Cloud/classes/class.ilCloudHookPlugin.php');
-require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/class.exocConfig.php');
 require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/App/class.exocApp.php');
 require_once('class.ilDynamicLanguage.php');
 /**
@@ -64,12 +63,7 @@ class ilOwnCloudPlugin extends ilCloudHookPlugin implements ilDynamicLanguageInt
      * @return exodAppBusiness
      */
     public function getExocApp() {
-        $exocConfig = new exocConfig();
-        $exocConfig->checkComplete();
-
         $app = exocApp::getInstance();
-
-
         return $app;
     }
 

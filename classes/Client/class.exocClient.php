@@ -1,5 +1,4 @@
 <?php
-require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/class.ilOwnCloudConfigGUI.php');
 require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/Client/Item/class.exocItemFactory.php');
 use Sabre\DAV\Client;
 /**

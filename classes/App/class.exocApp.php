@@ -89,9 +89,7 @@ class exocApp {
 
 
 	public function buildURLs(){
-        $this->setBaseUrl('https://drive.switch.ch/remote.php/webdav/');
-        $this->setRessourceUri('https://' . $this->getTenantName() . '-my.sharepoint.com/');
-        $this->setRessource('https://' . $this->getTenantName() . '-my.sharepoint.com/_api/v1.0/me');
+
     }
 
 
@@ -142,7 +140,7 @@ class exocApp {
 	/**
 	 * @param ilOwnCloud $il_own_cloud
 	 */
-	public function setIlOwnCloud(ilOneDrive $il_own_cloud) {
+	public function setIlOwnCloud(ilOwnCloud $il_own_cloud) {
 		$this->il_own_cloud = $il_own_cloud;
 	}
 
@@ -225,4 +223,3 @@ class exocApp {
 }
 
 
-?>
