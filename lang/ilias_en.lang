@@ -1,0 +1,5 @@
+msg_not_configured#:#The credentials for the connection have to be configured properly to view this folder's content.
+base_uri#:#Base-URI
+username#:#Username
+password#:#Password
+proxy#:#Proxy
