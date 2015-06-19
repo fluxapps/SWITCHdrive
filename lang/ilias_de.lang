@@ -1,3 +1,5 @@
+OwnCloud#:#OwnCloud
+create_info#:#OwnCloud Anbindung via WebDAV
 msg_not_configured#:#Um den Inhalt dieses Ordners anzuzeigen, müssen zuerst gültige Basis-URI, Benutzername und Passwort konfiguriert werden.
 base_uri#:#Basis-URI
 username#:#Benutzername

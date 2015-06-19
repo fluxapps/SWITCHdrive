@@ -1,3 +1,5 @@
+OwnCloud#:#OwnCloud
+create_info#:#Allows you to specify and browse a connection to an OwnCloud server via WebDAV
 msg_not_configured#:#The credentials for the connection have to be configured properly to view this folder's content.
 base_uri#:#Base-URI
 username#:#Username
