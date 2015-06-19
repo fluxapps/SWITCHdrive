@@ -112,6 +112,7 @@ class exocClient {
      */
     public function createFolder($path) {
         $path = rawurlencode($path);
+        //blablabla
 
         $response = $this->getSabreClient()->request('MKCOL', $path);
         if(self::DEBUG){
