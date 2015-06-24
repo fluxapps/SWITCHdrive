@@ -16,6 +16,10 @@ class swdrFolder extends swdrItem {
 	 * @var int
 	 */
 	protected $child_count = 0;
+    /**
+     * @var array
+     */
+    protected $childs;
 
 
 	/**
@@ -48,6 +52,28 @@ class swdrFolder extends swdrItem {
 	public function setType($type) {
 		$this->type = $type;
 	}
+
+    /**
+     * @param array $childs
+     */
+    public function setChilds($childs)
+    {
+        $this->childs = $childs;
+    }
+
+    /**
+     * @return array
+     */
+    public function getChilds()
+    {
+        return $this->childs;
+    }
+
+    public function addChild($id){
+        $this->childs[] = $id;
+    }
+
+
 }
 
 ?>

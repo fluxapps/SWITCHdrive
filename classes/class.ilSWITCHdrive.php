@@ -5,6 +5,8 @@ require_once('./Modules/Cloud/classes/class.ilCloudPlugin.php');
  * Class ilSWITCHdrive
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
+ *
+ * @ilCtrl_IsCalledBy ilSWITCHdrive : ilObjCloudGUI
  */
 class ilSWITCHdrive extends ilCloudPlugin {
 

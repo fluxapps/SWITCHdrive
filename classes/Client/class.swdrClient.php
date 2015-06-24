@@ -41,6 +41,11 @@ class swdrClient {
         return $this->sabre_client;
     }
 
+    public function hasConnection(){
+        $response = $this->getSabreClient()->request('GET');
+        return ($response['statusCode'] < 400);
+    }
+
     /**
      * @param $id
      *
