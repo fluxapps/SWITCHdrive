@@ -1,12 +1,12 @@
 <?php
-require_once('class.exocItem.php');
+require_once('class.swdrItem.php');
 
 /**
- * Class exocFolder
+ * Class swdrFolder
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class exocFolder extends exocItem {
+class swdrFolder extends swdrItem {
 
 	/**
 	 * @var int

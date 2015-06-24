@@ -3,11 +3,11 @@ require_once("./Modules/Cloud/classes/class.ilCloudPluginService.php");
 require_once('./Modules/Cloud/exceptions/class.ilCloudException.php');
 require_once("./Modules/Cloud/classes/class.ilCloudUtil.php");
 /**
- * Class ilOwnCloudService
+ * Class ilSWITCHdriveService
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class ilOwnCloudService extends ilCloudPluginService{
+class ilSWITCHdriveService extends ilCloudPluginService{
 
     public function __construct($service_name, $obj_id)
     {
@@ -15,18 +15,18 @@ class ilOwnCloudService extends ilCloudPluginService{
     }
 
     /**
-     * @return exocApp
+     * @return swdrApp
      */
     public function getApp() {
-        return $this->getPluginObject()->getExocApp();
+        return $this->getPluginObject()->getSwdrApp();
     }
 
 
     /**
-     * @return exocClient
+     * @return swdrClient
      */
     public function getClient() {
-        return $this->getApp()->getExocClient();
+        return $this->getApp()->getSwdrClient();
     }
 
     public function afterAuthService() {
@@ -43,11 +43,11 @@ class ilOwnCloudService extends ilCloudPluginService{
      * @param string          $parent_folder
      */
     public function addToFileTree(ilCloudFileTree  &$file_tree, $parent_folder = "/") {
-        $exocFiles = $this->getClient()->listFolder($parent_folder);
+        $swdrFiles = $this->getClient()->listFolder($parent_folder);
 
-        foreach ($exocFiles as $item) {
-            $size = ($item instanceof exocFile) ? $size = $item->getSize() : NULL;
-            $is_Dir = $item instanceof exocFolder;
+        foreach ($swdrFiles as $item) {
+            $size = ($item instanceof swdrFile) ? $size = $item->getSize() : NULL;
+            $is_Dir = $item instanceof swdrFolder;
             $file_tree->addNode($item->getFullPath(), $item->getId(), $is_Dir, strtotime($item->getDateTimeLastModified()), $size);
         }
         //		$file_tree->clearFileTreeSession();
@@ -116,7 +116,7 @@ class ilOwnCloudService extends ilCloudPluginService{
 
 
     /**
-     * @return ilOwnCloud
+     * @return ilSWITCHdrive
      */
     public function getPluginObject() {
         return parent::getPluginObject();
@@ -124,7 +124,7 @@ class ilOwnCloudService extends ilCloudPluginService{
 
 
     /**
-     * @return ilOneDrivePlugin
+     * @return ilSWITCHdrivePlugin
      */
     public function getPluginHookObject() {
         return parent::getPluginHookObject();

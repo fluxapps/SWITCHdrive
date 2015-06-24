@@ -1,12 +1,12 @@
 <?php
-require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/Client/class.exocClient.php');
+require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/classes/Client/class.swdrClient.php');
 
 /**
- * Class exocApp
+ * Class swdrApp
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class exocApp {
+class swdrApp {
 
 	const SSL_STANDARD = NULL;
 	const SSL_V3 = 3;
@@ -45,9 +45,9 @@ class exocApp {
 	 */
 	protected $ressource = '';
 	/**
-	 * @var exocClient
+	 * @var swdrClient
 	 */
-	protected $exoc_client;
+	protected $swdr_client;
 	/**
 	 * @var int
 	 */
@@ -68,8 +68,8 @@ class exocApp {
 	 * @param                 $client_secret
 	 */
 	protected function __construct() {
-        $exocClient = new exocClient($this);
-        $this->setExocClient($exocClient);
+        $swdrClient = new swdrClient($this);
+        $this->setSwdrClient($swdrClient);
 	}
 
     /**
@@ -77,7 +77,7 @@ class exocApp {
      * @param $client_id
      * @param $client_secret
      * @param exodTenant $exodTenant
-     * @return exocApp
+     * @return swdrApp
      */
     public static function getInstance() {
         if (!isset(self::$instance)) {
@@ -138,25 +138,25 @@ class exocApp {
 
 
 	/**
-	 * @param ilOwnCloud $il_own_cloud
+	 * @param ilSWITCHdrive $il_own_cloud
 	 */
-	public function setIlOwnCloud(ilOwnCloud $il_own_cloud) {
+	public function setIlSWITCHdrive(ilSWITCHdrive $il_own_cloud) {
 		$this->il_own_cloud = $il_own_cloud;
 	}
 
 	/**
-	 * @return exocClient
+	 * @return swdrClient
 	 */
-	public function getExocClient() {
-		return $this->exoc_client;
+	public function getSwdrClient() {
+		return $this->swdr_client;
 	}
 
 
 	/**
-	 * @param exocClient $exoc_client
+	 * @param swdrClient $swdr_client
 	 */
-	public function setExocClient($exoc_client) {
-		$this->exoc_client = $exoc_client;
+	public function setSwdrClient($swdr_client) {
+		$this->swdr_client = $swdr_client;
 	}
 
 	/**

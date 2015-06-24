@@ -1,21 +1,21 @@
 <?php
-require_once('class.exocFolder.php');
-require_once('class.exocFile.php');
-require_once('class.exocItemCache.php');
+require_once('class.swdrFolder.php');
+require_once('class.swdrFile.php');
+require_once('class.swdrItemCache.php');
 require_once('./Modules/Cloud/exceptions/class.ilCloudException.php');
 
 
 /**
- * Class exocItemFactory
+ * Class swdrItemFactory
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class exocItemFactory {
+class swdrItemFactory {
 
 	/**
 	 * @param array $response
 	 *
-	 * @return exocFolder[]|exocFile[]
+	 * @return swdrFolder[]|swdrFile[]
 	 */
 	public static function getInstancesFromResponse($response) {
 		$return = array();
@@ -26,14 +26,14 @@ class exocItemFactory {
         $parent_id = $parent['{http://owncloud.org/ns}id'];
         foreach ($response as $web_url => $props) {
 			if (!$props["{DAV:}getcontenttype"]) {//is folder
-                $exid_item = new exocFolder();
+                $exid_item = new swdrFolder();
                 $exid_item->loadFromProperties($web_url, $props, $parent_id);
-                exocItemCache::store($exid_item);
+                swdrItemCache::store($exid_item);
                 $return[] = $exid_item;
 			} else { // is file
-				$exid_item = new exocFile();
+				$exid_item = new swdrFile();
 				$exid_item->loadFromProperties($web_url, $props, $parent_id);
-                exocItemCache::store($exid_item);
+                swdrItemCache::store($exid_item);
 				$return[] = $exid_item;
 			}
 		}

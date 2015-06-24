@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class exocItem
+ * Class swdrItem
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-abstract class exocItem {
+abstract class swdrItem {
 
 	const TYPE_UNKNOWN = - 1;
 	const TYPE_FOLDER = 1;

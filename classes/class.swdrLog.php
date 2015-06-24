@@ -2,21 +2,21 @@
 require_once('./Services/Logging/classes/class.ilLog.php');
 
 /**
- * Class exodLog
+ * Class swdrLog
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class exocLog extends ilLog {
+class swdrLog extends ilLog {
 
 	const OC_LOG = 'oc.log';
 	/**
-	 * @var exocLog
+	 * @var swdrLog
 	 */
 	protected static $instance;
 
 
 	/**
-	 * @return exodLog
+	 * @return swdrLog
 	 */
 	public static function getInstance() {
 		if (! isset(self::$instance)) {

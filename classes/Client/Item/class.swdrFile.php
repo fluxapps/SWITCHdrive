@@ -1,12 +1,12 @@
 <?php
-require_once('class.exocItem.php');
+require_once('class.swdrItem.php');
 
 /**
- * Class exocFile
+ * Class swdrFile
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class exocFile extends exocItem {
+class swdrFile extends swdrItem {
 
 	/**
 	 * @var array

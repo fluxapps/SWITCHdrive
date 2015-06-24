@@ -2,11 +2,11 @@
 require_once('./Modules/Cloud/classes/class.ilCloudPlugin.php');
 
 /**
- * Class ilOwnCloud
+ * Class ilSWITCHdrive
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class ilOwnCloud extends ilCloudPlugin {
+class ilSWITCHdrive extends ilCloudPlugin {
 
     /**
      * @var String
@@ -95,11 +95,11 @@ class ilOwnCloud extends ilCloudPlugin {
     }
 
     /**
-     * @return exocApp
+     * @return swdrApp
      * @throws ilCloudException
      */
-    public function getExocApp() {
-        $inst = ilOwnCloudPlugin::getInstance()->getExocApp();
+    public function getSwdrApp() {
+        $inst = ilSWITCHdrivePlugin::getInstance()->getSwdrApp();
         return $inst;
     }
 

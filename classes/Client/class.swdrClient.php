@@ -1,35 +1,36 @@
 <?php
-require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/Client/Item/class.exocItemFactory.php');
+require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/classes/Client/Item/class.swdrItemFactory.php');
+require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/classes//class.swdrConfig.php');
 use Sabre\DAV\Client;
 /**
- * Class exocClient
+ * Class swdrClient
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class exocClient {
+class swdrClient {
 
     /**
      * @var Sabre\DAV\Client
      */
     protected $sabre_client;
     /**
-     * @var exocApp
+     * @var swdrApp
      */
-    protected $exoc_app;
+    protected $swdr_app;
     /**
-     * @var ilOwnCloudPlugin
+     * @var ilSWITCHdrivePlugin
      */
     protected $pl;
 
     const DEBUG = true;
 
     /**
-     * @param exocApp $exocApp
+     * @param swdrApp $swdrApp
      */
-    public function __construct(exocApp $exocApp) {
-        $this->setExocApp($exocApp);
-        $this->pl = ilOwnCloudPlugin::getInstance();
-        include './Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/lib/SabreDAV/vendor/autoload.php';
+    public function __construct(swdrApp $swdrApp) {
+        $this->setSwdrApp($swdrApp);
+        $this->pl = ilSWITCHdrivePlugin::getInstance();
+        include './Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/lib/SabreDAV/vendor/autoload.php';
     }
 
     protected function getSabreClient(){
@@ -43,14 +44,14 @@ class exocClient {
     /**
      * @param $id
      *
-     * @return exodFile[]|exodFolder[]
+     * @return swdrFile[]|swdrFolder[]
      */
     public function listFolder($id) {
         $id = rawurlencode($id);
         $settings = $this->getObjectSettings();
         if($client = $this->getSabreClient()){
             $response = $client->propFind($settings['base_uri'] . $id, array(), 1);
-            $items = exocItemFactory::getInstancesFromResponse($response);
+            $items = swdrItemFactory::getInstancesFromResponse($response);
             return $items;
         }
         return array();
@@ -79,7 +80,7 @@ class exocClient {
     /**
      * @param $path
      *
-     * @return exocFile
+     * @return swdrFile
      * @throws ilCloudException
      */
     public function deliverFile($path) {
@@ -87,7 +88,7 @@ class exocClient {
         $response = $this->getSabreClient()->request('GET', $path);
         if(self::DEBUG){
             global $log;
-            $log->write("[exocClient]->deliverFile({$path}) | response status Code: {$response['statusCode']}");
+            $log->write("[swdrClient]->deliverFile({$path}) | response status Code: {$response['statusCode']}");
         }
         $path = rawurldecode($path);
         $file_name = pathinfo($path, PATHINFO_FILENAME);
@@ -112,12 +113,11 @@ class exocClient {
      */
     public function createFolder($path) {
         $path = rawurlencode($path);
-        //blablabla
 
         $response = $this->getSabreClient()->request('MKCOL', $path);
         if(self::DEBUG){
             global $log;
-            $log->write("[exocClient]->createFolder({$path}) | response status Code: {$response['statusCode']}");
+            $log->write("[swdrClient]->createFolder({$path}) | response status Code: {$response['statusCode']}");
         }
         return true;
     }
@@ -144,7 +144,7 @@ class exocClient {
         $response = $this->getSabreClient()->request('PUT', $location, file_get_contents($local_file_path));
         if(self::DEBUG){
             global $log;
-            $log->write("[exocClient]->uploadFile({$location}, {$local_file_path}) | response status Code: {$response['statusCode']}");
+            $log->write("[swdrClient]->uploadFile({$location}, {$local_file_path}) | response status Code: {$response['statusCode']}");
         }
         return true;
     }
@@ -159,7 +159,7 @@ class exocClient {
         $response = $this->getSabreClient()->request('DELETE', rawurlencode($path));
         if(self::DEBUG){
             global $log;
-            $log->write("[exocClient]->delete({$path}) | response status Code: {$response['statusCode']}");
+            $log->write("[swdrClient]->delete({$path}) | response status Code: {$response['statusCode']}");
         }
         return true;
     }
@@ -180,18 +180,18 @@ class exocClient {
 
 
     /**
-     * @return exocApp
+     * @return swdrApp
      */
-    public function getExocApp() {
-        return $this->exoc_app;
+    public function getSwdrApp() {
+        return $this->swdr_app;
     }
 
 
     /**
      * @param exodApp $exod_app
      */
-    public function setExocApp($exoc_app) {
-        $this->exod_app = $exoc_app;
+    public function setSwdrApp($swdr_app) {
+        $this->exod_app = $swdr_app;
     }
 
     /**
@@ -200,13 +200,14 @@ class exocClient {
     protected function getObjectSettings()
     {
         $obj_id = ilObject2::_lookupObjectId($_GET['ref_id']);
-        $ownCloudObj = new ilOwnCloud('OwnCloud', $obj_id);
+        $SWITCHdriveObj = new ilSWITCHdrive('SWITCHdrive', $obj_id);
+        $conf = new swdrConfig();
         $settings = array(
-            'baseUri' => $ownCloudObj->getBaseUri(),
-            'userName' => $ownCloudObj->getUsername(),
-            'password' => $ownCloudObj->getPassword(),
+            'baseUri' => $conf->getBaseURL(),
+            'userName' => $SWITCHdriveObj->getUsername(),
+            'password' => $SWITCHdriveObj->getPassword(),
         );
-        if ($proxy = $ownCloudObj->getProxy()) {
+        if ($proxy = $SWITCHdriveObj->getProxy()) {
             $settings['proxy'] = $proxy;
             return $settings;
         }

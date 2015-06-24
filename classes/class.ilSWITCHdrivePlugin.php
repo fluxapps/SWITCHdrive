@@ -1,18 +1,18 @@
 <?php
 require_once('./Modules/Cloud/classes/class.ilCloudHookPlugin.php');
-require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/classes/App/class.exocApp.php');
+require_once('./Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/classes/App/class.swdrApp.php');
 require_once('class.ilDynamicLanguage.php');
 /**
- * Class ilOwnCloudPlugin
+ * Class ilSWITCHdrivePlugin
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class ilOwnCloudPlugin extends ilCloudHookPlugin implements ilDynamicLanguageInterfaceOC{
+class ilSWITCHdrivePlugin extends ilCloudHookPlugin implements ilDynamicLanguageInterfaceOC{
 
-    const PLUGIN_NAME = 'OwnCloud';
+    const PLUGIN_NAME = 'SWITCHdrive';
 
     /**
-     * @var exocApp
+     * @var swdrApp
      */
     protected static $app_instance;
 
@@ -25,13 +25,13 @@ class ilOwnCloudPlugin extends ilCloudHookPlugin implements ilDynamicLanguageInt
 
 
     /**
-     * @var ilOwnCloudPlugin
+     * @var ilSWITCHdrivePlugin
      */
     protected static $instance;
 
 
     /**
-     * @return ilOwnCloudPlugin
+     * @return ilSWITCHdrivePlugin
      */
     public static function getInstance() {
         if (! isset(self::$instance)) {
@@ -46,7 +46,7 @@ class ilOwnCloudPlugin extends ilCloudHookPlugin implements ilDynamicLanguageInt
      * @return string
      */
     public function getCsvPath() {
-        return './Customizing/global/plugins/Modules/Cloud/CloudHook/OwnCloud/lang/lang.csv';
+        return './Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/lang/lang.csv';
     }
 
 
@@ -62,8 +62,8 @@ class ilOwnCloudPlugin extends ilCloudHookPlugin implements ilDynamicLanguageInt
      *
      * @return exodAppBusiness
      */
-    public function getExocApp() {
-        $app = exocApp::getInstance();
+    public function getSwdrApp() {
+        $app = swdrApp::getInstance();
         return $app;
     }
 

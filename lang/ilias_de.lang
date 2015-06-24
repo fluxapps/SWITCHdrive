@@ -1,7 +1,14 @@
-OwnCloud#:#OwnCloud
-create_info#:#OwnCloud Anbindung via WebDAV
-msg_not_configured#:#Um den Inhalt dieses Ordners anzuzeigen, müssen zuerst gültige Basis-URI, Benutzername und Passwort konfiguriert werden.
-base_uri#:#Basis-URI
+SWITCHdrive#:#SWITCHdrive
+create_info#:#SWITCHdrive Anbindung via WebDAV
+msg_not_configured#:#Um den Inhalt dieses Ordners anzuzeigen, müssen zuerst gültige Benutzername und Passwort konfiguriert werden.
+password_info#:#Bitte beachten Sie, dass die Zugangsdaten für SWITCHdrive in ILIAS gespeichert werden, und so von den Systemadministratoren ausgelesen werden könnten. Aus Sicherheitsgründen sollten Sie für unterschiedliche Webdienste auch immer unterschiedliche Passwörter verwenden.
+base_url#:#Basis-URL
 username#:#Benutzername
 password#:#Passwort
 proxy#:#Proxy
+configuration#:#Einstellungen
+add_new_base_folder#:#Basis-Ordner
+add_new_custom_base_folder#:#Eigener Ordner
+add_new_custom_base_folder_input#:#Ordnername
+add_new_custom_base_folder_input_info#:#Mit führendem /
+add_new_default_base_folder#:#Hauptverzeichnis
