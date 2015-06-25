@@ -97,8 +97,9 @@ class swdrClient {
         }
         $path = rawurldecode($path);
         $file_name = pathinfo($path, PATHINFO_FILENAME);
-
-        header("Content-type: application/octet-stream");
+        
+        header("Content-type: ".$response['headers']['content-type']);
+//        header("Content-type: application/octet-stream");
         header('Content-Description: File Transfer');
         header('Content-Disposition: attachment; filename=' . $file_name);
         header('Content-Transfer-Encoding: binary');
