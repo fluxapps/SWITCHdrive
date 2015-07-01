@@ -13,5 +13,5 @@ add_new_custom_base_folder_input#:#Ordnername
 add_new_custom_base_folder_input_info#:#Mit führendem /
 add_new_default_base_folder#:#Hauptverzeichnis
 choose_root#:#Bitte wählen Sie unten den gewünschten zu verlinkenden Ordner aus.
+subtab_choose_root#:#Ordner auswählen
 no_connection#:#Es konnte keine Verbindung zum SWITCHdrive Server hergestellt werden. Bitte überprüfen Sie den Benutzernamen und das Passwort und kontaktieren Sie allenfalls den Systemadministrator.
-save_choose_root#:#Speichern & Ordner auswählen

@@ -13,5 +13,5 @@ add_new_custom_base_folder_input#:#Foldername
 add_new_custom_base_folder_input_info#:#With leading /
 add_new_default_base_folder#:#Main folder
 choose_root#:#Please choose a root folder from the tree below.
+subtab_choose_root#:#Choose folder
 no_connection#:#Could not connect to the SWITCHdrive server. Please check your username and password or contact the system administrator.
-save_choose_root#:#Save & choose root folder
