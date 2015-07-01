@@ -96,8 +96,8 @@ class swdrClient {
             $log->write("[swdrClient]->deliverFile({$path}) | response status Code: {$response['statusCode']}");
         }
         $path = rawurldecode($path);
-        $file_name = pathinfo($path, PATHINFO_FILENAME);
-        
+        $file_name = pathinfo($path, PATHINFO_FILENAME) . '.' . pathinfo($path, PATHINFO_EXTENSION);
+
         header("Content-type: ".$response['headers']['content-type']);
 //        header("Content-type: application/octet-stream");
         header('Content-Description: File Transfer');
