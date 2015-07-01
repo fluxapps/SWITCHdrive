@@ -58,10 +58,11 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
     }
 
     public function setRootFolder(){
-        global $ilCtrl;
+        global $ilCtrl, $lng;
         $root_path = $_GET['root_path'];
         $this->getPluginObject()->getCloudModulObject()->setRootFolder($root_path);
         $this->getPluginObject()->getCloudModulObject()->update();
+        ilUtil::sendSuccess($lng->txt("msg_obj_modified"), true);
         $ilCtrl->redirectByClass('ilCloudPluginSettingsGUI', 'editSettings');
     }
 
