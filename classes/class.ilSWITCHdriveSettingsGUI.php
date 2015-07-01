@@ -90,22 +90,17 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
         $item->setRetype(false);
         $item->setRequired(true);
 	    $this->form->addItem($item);
-
-        $item = new ilTextInputGUI($this->getPluginObject()->getPluginHookObject()->txt('proxy'), 'proxy');
-	    $this->form->addItem($item);
     }
 
     protected function getPluginSettingsValues(&$values){
         $values['username'] = $this->getPluginObject()->getUsername();
         $values['password'] = $this->getPluginObject()->getPassword();
-        $values['proxy'] = $this->getPluginObject()->getProxy();
     }
 
     public function updatePluginSettings()
     {
         $this->getPluginObject()->setUsername($this->form->getInput("username"));
         $this->getPluginObject()->setPassword($this->form->getInput("password"));
-        $this->getPluginObject()->setProxy($this->form->getInput("proxy"));
         $this->getPluginObject()->doUpdate();
 
         $client = $this->getPluginObject()->getSwdrApp()->getSwdrClient();

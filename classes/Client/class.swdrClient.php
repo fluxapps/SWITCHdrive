@@ -213,10 +213,6 @@ class swdrClient {
             'userName' => $SWITCHdriveObj->getUsername(),
             'password' => $SWITCHdriveObj->getPassword(),
         );
-        if ($proxy = $SWITCHdriveObj->getProxy()) {
-            $settings['proxy'] = $proxy;
-            return $settings;
-        }
         return $settings;
     }
 

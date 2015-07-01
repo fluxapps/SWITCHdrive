@@ -22,10 +22,6 @@ class ilSWITCHdrive extends ilCloudPlugin {
      * @var String
      */
     protected $password;
-    /**
-     * @var String
-     */
-    protected $proxy;
 
 
     /**
@@ -89,10 +85,6 @@ class ilSWITCHdrive extends ilCloudPlugin {
                 'text',
                 $this->getPassword()
             ),
-            'proxy' => array(
-                'text',
-                $this->getProxy()
-            ),
         );
     }
 
@@ -135,22 +127,6 @@ class ilSWITCHdrive extends ilCloudPlugin {
     public function getUsername()
     {
         return $this->username;
-    }
-
-    /**
-     * @param String $proxy
-     */
-    public function setProxy($proxy)
-    {
-        $this->proxy = $proxy;
-    }
-
-    /**
-     * @return String
-     */
-    public function getProxy()
-    {
-        return $this->proxy;
     }
 
     /**
