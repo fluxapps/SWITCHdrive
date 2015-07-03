@@ -14,8 +14,18 @@ class swdrTreeGUI extends ilExplorerBaseGUI{
     protected $tree;
 
     public function __construct($a_expl_id, $a_parent_obj, $a_parent_cmd, swdrTree $tree){
+        global $tpl;
         parent::__construct($a_expl_id, $a_parent_obj, $a_parent_cmd);
         $this->tree = $tree;
+        $css =
+            '.jstree a.clickable_node {
+               color:black !important;
+             }
+
+             .jstree a:hover {
+               color:#b2052e !important;
+             }';
+        $tpl->addInlineCss($css);
     }
 
     /**
@@ -29,7 +39,10 @@ class swdrTreeGUI extends ilExplorerBaseGUI{
         }else{
             $img = 'icon_dcl_fold.svg';
         }
-        $node->getName() ? $name = $node->getName() : $name = 'root';
+        $node->getName() ? $name = $node->getName() : $name = 'SWITCHdrive';
+        if($this->isNodeClickable($node)){
+            $name = '<a class="clickable_node">'.$name.'</>';
+        }
         return  ilUtil::img(ilUtil::getImagePath($img))." ".$name;
     }
 

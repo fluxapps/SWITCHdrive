@@ -33,7 +33,7 @@ class swdrTree {
         $this->root_path = $root_path;
         $root = new swdrFolder();
         $root->setId($root_id);
-        $root->setName('SWITCHdrive');
+        $root->setName('');
         $root->setPath($root_path);
         $root->setChilds(array());
         $this->nodes = array();
