@@ -41,7 +41,7 @@ class swdrTreeGUI extends ilExplorerBaseGUI{
         }
         $node->getName() ? $name = $node->getName() : $name = 'SWITCHdrive';
         if($this->isNodeClickable($node)){
-            $name = '<a class="clickable_node">'.$name.'</>';
+            $name = '<a class="clickable_node" href="'.$this->getNodeHref($node).'">'.$name.'</>';
         }
         return  ilUtil::img(ilUtil::getImagePath($img))." ".$name;
     }
