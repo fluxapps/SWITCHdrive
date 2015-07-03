@@ -76,6 +76,10 @@ abstract class swdrItem {
 	 * @return string
 	 */
 	public function getFullPath() {
+        if($this->id == 'root'){
+            return '/';
+        }
+
 		$path = '';
 		if ($this->getPath() AND $this->getPath() != '/') {
 			$path = $this->getPath();
