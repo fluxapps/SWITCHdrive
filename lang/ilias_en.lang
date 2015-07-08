@@ -1,5 +1,5 @@
 SWITCHdrive#:#SWITCHdrive
-create_info#:#Inteface for Cloud-Service SWITCHdrive at <a href="https://drive.switch.ch" target="_blank">https://drive.switch.ch</a>
+create_info#:#Inteface for Cloud-Service SWITCHdrive at <a href="https://drive.switch.ch" target="_blank">https://drive.switch.ch</a><br>This data is not stored in ILIAS, only in SWITCHdrive. They can only be read if the SWITCHdrive service is available and the credentials are correct.
 msg_not_configured#:#The credentials for the connection have to be configured properly to view this folder's content.
 password_info#:#Notice that the credentials for SWITCHdrive are stored in ILIAS and thus could be read by systemadministrators. For security reasons, different passwords should be used for different webservices.
 base_url#:#Base-URL

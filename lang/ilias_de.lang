@@ -1,5 +1,5 @@
 SWITCHdrive#:#SWITCHdrive
-create_info#:#Anbindung des Cloud-Dienstes SWITCHdrive auf <a href="https://drive.switch.ch" target="_blank">https://drive.switch.ch</a>
+create_info#:#Anbindung des Cloud-Dienstes SWITCHdrive auf <a href="https://drive.switch.ch" target="_blank">https://drive.switch.ch</a><br>Diese Dateien sind nicht in ILIAS gespeichert, sondern nur im SWITCHdrive, und können in ILIAS nur gelesen werden, solange der Dienst SWITCHdrive zur Verfügung steht, und Ihre Zugangsdaten korrekt hinterlegt sind.
 msg_not_configured#:#Um den Inhalt dieses Ordners anzuzeigen, müssen zuerst gültige Benutzername und Passwort konfiguriert werden.
 password_info#:#Bitte beachten Sie, dass die Zugangsdaten für SWITCHdrive in ILIAS gespeichert werden, und so von den Systemadministratoren ausgelesen werden könnten. Aus Sicherheitsgründen sollten Sie für unterschiedliche Webdienste auch immer unterschiedliche Passwörter verwenden.
 base_url#:#Basis-URL
