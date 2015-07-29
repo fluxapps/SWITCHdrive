@@ -185,7 +185,11 @@ class swdrClient {
      * @return bool
      */
     protected function itemExists($path) {
-        $request = $this->getSabreClient()->request('GET', rawurlencode($path));
+        try {
+            $request = $this->getSabreClient()->request('GET', rawurlencode($path));
+        } catch (Exception $e) {
+            return false;
+        }
         if($request['statusCode'] < 400){
             return true;
         }
