@@ -60,10 +60,10 @@ class swdrClient {
      * @return swdrFile[]|swdrFolder[]
      */
     public function listFolder($id) {
-        $id = rawurlencode($id);
+        $id = str_replace("%2F", "/", rawurlencode($id)); // Do not encode slashes 
         $settings = $this->getObjectSettings();
         if($client = $this->getSabreClient()){
-            $response = $client->propFind($settings['base_uri'] . $id, array(), 1);
+            $response = $client->propFind($settings['baseUri'] . $id, array(), 1);
             $items = swdrItemFactory::getInstancesFromResponse($response);
             return $items;
         }
@@ -221,7 +221,7 @@ class swdrClient {
         $SWITCHdriveObj = new ilSWITCHdrive('SWITCHdrive', $obj_id);
         $conf = new swdrConfig();
         $settings = array(
-            'baseUri' => $conf->getBaseURL(),
+            'baseUri' => rtrim($conf->getBaseURL(), '/'),
             'userName' => $SWITCHdriveObj->getUsername(),
             'password' => $SWITCHdriveObj->getPassword(),
         );
