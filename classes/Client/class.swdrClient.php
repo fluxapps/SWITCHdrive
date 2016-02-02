@@ -51,6 +51,7 @@ class swdrClient {
         } catch (Exception $e) {
             return false;
         }
+
         return ($response['statusCode'] < 400);
     }
 
@@ -60,9 +61,9 @@ class swdrClient {
      * @return swdrFile[]|swdrFolder[]
      */
     public function listFolder($id) {
-        $id = str_replace("%2F", "/", rawurlencode($id)); // Do not encode slashes 
+        $id = $this->urlencode(ltrim($id, '/'));
         $settings = $this->getObjectSettings();
-        if($client = $this->getSabreClient()){
+        if ($client = $this->getSabreClient()) {
             $response = $client->propFind($settings['baseUri'] . $id, array(), 1);
             $items = swdrItemFactory::getInstancesFromResponse($response);
             return $items;
@@ -97,7 +98,7 @@ class swdrClient {
      * @throws ilCloudException
      */
     public function deliverFile($path) {
-        $path = rawurlencode($path);
+        $path = $this->urlencode($path);
         $response = $this->getSabreClient()->request('GET', $path);
         if(self::DEBUG){
             global $log;
@@ -105,7 +106,6 @@ class swdrClient {
         }
         $path = rawurldecode($path);
         $file_name = pathinfo($path, PATHINFO_FILENAME) . '.' . pathinfo($path, PATHINFO_EXTENSION);
-
         header("Content-type: ".$response['headers']['content-type']);
 //        header("Content-type: application/octet-stream");
         header('Content-Description: File Transfer');
@@ -115,8 +115,8 @@ class swdrClient {
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
         header('Content-Length: ' . $response['headers']['content-length'][0]);
-        echo $response['body'];exit;
-
+        echo $response['body'];
+        exit;
     }
 
 
@@ -126,16 +126,27 @@ class swdrClient {
      * @return bool
      */
     public function createFolder($path) {
-        $path = rawurlencode($path);
-
-        $response = $this->getSabreClient()->request('MKCOL', $path);
+        $path = $this->urlencode($path);
+        $response = $this->getSabreClient()->request('MKCOL', ltrim($path, '/'));
         if(self::DEBUG){
             global $log;
             $log->write("[swdrClient]->createFolder({$path}) | response status Code: {$response['statusCode']}");
         }
-        return true;
+
+        return ($response['statusCode'] == 200);
     }
 
+
+    /**
+     * urlencode without encoding slashes
+     *
+     * @param $str
+     * @return mixed
+     */
+    protected function urlencode($str)
+    {
+        return str_replace('%2F', '/', rawurlencode($str));
+    }
 
     /**
      * @param $location
@@ -145,7 +156,7 @@ class swdrClient {
      * @throws ilCloudException
      */
     public function uploadFile($location, $local_file_path) {
-        $location = rawurlencode($location);
+        $location = $this->urlencode(ltrim($location, '/'));
         if($this->fileExists($location)){
             $basename = pathinfo($location, PATHINFO_FILENAME);
             $extension = pathinfo($location, PATHINFO_EXTENSION);
@@ -160,7 +171,8 @@ class swdrClient {
             global $log;
             $log->write("[swdrClient]->uploadFile({$location}, {$local_file_path}) | response status Code: {$response['statusCode']}");
         }
-        return true;
+
+        return ($response['statusCode'] == 200);
     }
 
 
@@ -170,12 +182,13 @@ class swdrClient {
      * @return bool
      */
     public function delete($path) {
-        $response = $this->getSabreClient()->request('DELETE', rawurlencode($path));
+        $response = $this->getSabreClient()->request('DELETE', ltrim($this->urlencode($path), '/'));
         if(self::DEBUG){
             global $log;
             $log->write("[swdrClient]->delete({$path}) | response status Code: {$response['statusCode']}");
         }
-        return true;
+
+        return ($response['statusCode'] == 200);
     }
 
 
@@ -186,14 +199,12 @@ class swdrClient {
      */
     protected function itemExists($path) {
         try {
-            $request = $this->getSabreClient()->request('GET', rawurlencode($path));
+            $request = $this->getSabreClient()->request('GET', $this->urlencode($path));
         } catch (Exception $e) {
             return false;
         }
-        if($request['statusCode'] < 400){
-            return true;
-        }
-        return false;
+
+        return ($request['statusCode'] < 400);
     }
 
 
@@ -221,7 +232,7 @@ class swdrClient {
         $SWITCHdriveObj = new ilSWITCHdrive('SWITCHdrive', $obj_id);
         $conf = new swdrConfig();
         $settings = array(
-            'baseUri' => rtrim($conf->getBaseURL(), '/'),
+            'baseUri' => rtrim($conf->getBaseURL(), '/') . '/',
             'userName' => $SWITCHdriveObj->getUsername(),
             'password' => $SWITCHdriveObj->getPassword(),
         );
