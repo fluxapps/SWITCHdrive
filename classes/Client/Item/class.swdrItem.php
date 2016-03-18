@@ -52,23 +52,24 @@ abstract class swdrItem {
 	protected $e_tag = '';
 
 
-    /**
-     * @param $web_url String
-     * @param $properties array
-     */
-    public function loadFromProperties($web_url, $properties, $parent_id) {
-        $web_url = rawurldecode($web_url);
-        $this->setId(md5($web_url));
-        $this->setParentId($parent_id);
-        $this->setWebUrl($web_url);
-        if($this->getType()==self::TYPE_FOLDER ){
-            $web_url = substr($web_url, 0, -1);
-        }
-        $this->setName( substr($web_url, strrpos($web_url, '/') + 1, strlen($web_url) - strrpos($web_url, '/')) );
-        $web_url = substr($web_url, 0, -(strlen($this->getName())));
-        $this->setPath(substr($web_url, 18));
-        $this->setDateTimeLastModified($properties["{DAV:}getlastmodified"]);
-        $this->setETag($properties["{DAV:}getetag"]);
+	/**
+	 * @param $web_url    String
+	 * @param $properties array
+	 */
+	public function loadFromProperties($web_url, $properties, $parent_id) {
+		$web_url = rawurldecode($web_url);
+		$this->setId($properties["{DAV:}getetag"] ? $properties["{DAV:}getetag"] : md5($web_url));
+		$this->setId(md5($web_url));
+		$this->setParentId($parent_id);
+		$this->setWebUrl($web_url);
+		if ($this->getType() == self::TYPE_FOLDER) {
+			$web_url = substr($web_url, 0, - 1);
+		}
+		$this->setName(substr($web_url, strrpos($web_url, '/') + 1, strlen($web_url) - strrpos($web_url, '/')));
+		$web_url = substr($web_url, 0, - (strlen($this->getName())));
+		$this->setPath(substr($web_url, 18));
+		$this->setDateTimeLastModified($properties["{DAV:}getlastmodified"]);
+		$this->setETag($properties["{DAV:}getetag"]);
 	}
 
 
