@@ -117,7 +117,7 @@ class swdrClient {
 		$file_name = pathinfo($path, PATHINFO_FILENAME) . '.' . pathinfo($path, PATHINFO_EXTENSION);
 		header("Content-type: " . $response['headers']['content-type']);
 		header('Content-Description: File Transfer');
-		header('Content-Disposition: attachment; filename=' . $file_name);
+		header('Content-Disposition: attachment; filename="' . $file_name . '"');
 		header('Content-Transfer-Encoding: binary');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate');
