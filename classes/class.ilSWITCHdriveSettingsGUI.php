@@ -86,13 +86,25 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
 
     public function updatePluginSettings()
     {
+        global $ilCtrl;
         $this->setTabs("general");
+
+        $client = $this->getPluginObject()->getSwdrApp()->getSwdrClient();
+        $had_connection = $client->hasConnection();
 
         $this->getPluginObject()->setUsername($this->form->getInput("username"));
         $this->getPluginObject()->setPassword($this->form->getInput("password"));
         $this->getPluginObject()->doUpdate();
 
-        $client = $this->getPluginObject()->getSwdrApp()->getSwdrClient();
+        $client->loadClient();
+        $has_connection = $client->hasConnection();
+        // show tree view if client found connection after the update
+        if (!$had_connection && $has_connection) {
+            $ilCtrl->setParameter($this, 'active_subtab', 'choose_root');
+        } else {
+            $ilCtrl->setParameter($this, 'active_subtab', 'general');
+        }
+
         if(!$client->hasConnection()){
             ilUtil::sendFailure($this->getPluginObject()->getPluginHookObject()->txt('no_connection'), true);
         }
@@ -103,7 +115,7 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
      */
     function editSettings()
     {
-        global $tpl, $ilTabs, $lng, $ilCtrl;
+        global $tpl;
 
         if($_GET['active_subtab'] == 'choose_root'){
             $this->setTabs("choose_root");

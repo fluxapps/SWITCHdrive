@@ -41,8 +41,7 @@ class swdrClient {
 
 	protected function getSabreClient() {
 		if (!$this->sabre_client) {
-			$settings = $this->getObjectSettings();
-			$this->sabre_client = new Client($settings);
+			$this->loadClient();
 		}
 
 		return $this->sabre_client;
@@ -246,5 +245,14 @@ class swdrClient {
 		);
 
 		return $settings;
+	}
+
+
+	/**
+	 * (re)initialize the client with settings from the switchdrive object
+	 */
+	public function loadClient() {
+		$settings = $this->getObjectSettings();
+		$this->sabre_client = new Client($settings);
 	}
 }
