@@ -57,9 +57,8 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
         $this->form->setFormAction($ilCtrl->getFormActionByClass("ilCloudPluginSettingsGUI"));
     }
 
-    public function setRootFolder(){
+    public function setRootFolder($root_path){
         global $ilCtrl, $lng;
-        $root_path = $_GET['root_path'];
         $this->getPluginObject()->getCloudModulObject()->setRootFolder($root_path);
         $this->getPluginObject()->getCloudModulObject()->update();
         ilUtil::sendSuccess($lng->txt("msg_obj_modified"), true);
@@ -117,6 +116,10 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
     {
         global $tpl;
 
+        if($root_path = $_GET['root_path']) {
+            $this->setRootFolder($root_path);
+        }
+
         if($_GET['active_subtab'] == 'choose_root'){
             $this->setTabs("choose_root");
             $this->showTreeView();
@@ -166,7 +169,11 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
         $client = $this->getPluginObject()->getSwdrApp()->getSwdrClient();
         if($client->hasConnection()){
             $tree = new swdrTree($client);
-            $tree_gui = new swdrTreeGUI('tree_expl', 'ilCloudPluginSettingsGUI', 'setRootFolder', $tree);
+            $tree_gui = new swdrTreeGUI('tree_expl', $this, 'editSettings', $tree);
+            if ($tree_gui->handleCommand())
+            {
+                return;
+            }
             ilUtil::sendInfo($this->getPluginObject()->getPluginHookObject()->txt('choose_root'), true);
             $tpl->setContent($tree_gui->getHTML());
             $tpl->show();exit;
