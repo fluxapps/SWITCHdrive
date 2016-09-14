@@ -67,14 +67,18 @@ class ilSWITCHdriveSettingsGUI extends ilCloudPluginSettingsGUI {
 
 
 	protected function initPluginSettings() {
+        // username
         $item = new ilTextInputGUI($this->getPluginObject()->getPluginHookObject()->txt('username'), 'username');
         $item->setRequired(true);
 	    $this->form->addItem($item);
 
+
+        //password
         $item = new ilPasswordInputGUI($this->getPluginObject()->getPluginHookObject()->txt('password'), 'password');
         $item->setInfo($this->getPluginObject()->getPluginHookObject()->txt('password_info'));
         $item->setRetype(false);
         $item->setRequired(true);
+        $item->setSkipSyntaxCheck(true);
 	    $this->form->addItem($item);
     }
 
