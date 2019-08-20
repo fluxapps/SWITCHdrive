@@ -40,11 +40,13 @@ class ilSWITCHdriveService extends ilCloudPluginService {
 	}
 
 
-	/**
-	 * @param ilCloudFileTree $file_tree
-	 * @param string $parent_folder
-	 */
-	public function addToFileTree(ilCloudFileTree  &$file_tree, $parent_folder = "/") {
+    /**
+     * @param ilCloudFileTree $file_tree
+     * @param string          $parent_folder
+     *
+     * @throws ilCloudException
+     */
+	public function addToFileTree(ilCloudFileTree  $file_tree, $parent_folder = "/") {
 		$swdrFiles = $this->getClient()->listFolder($parent_folder);
 
 		foreach ($swdrFiles as $item) {
