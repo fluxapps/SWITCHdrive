@@ -28,16 +28,11 @@ class swdrClient {
 	/**
 	 * @param swdrApp $swdrApp
 	 */
-	public function __construct(swdrApp $swdrApp) {
-		$this->setSwdrApp($swdrApp);
-		$this->pl = ilSWITCHdrivePlugin::getInstance();
-		if (PHP_VERSION_ID < 50400) {   //sabredav 3.0 is not supported for php version < 5.4
-			include './Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/lib/SabreDAV-1.8.12/vendor/autoload.php';
-		} else {
-			include './Customizing/global/plugins/Modules/Cloud/CloudHook/SWITCHdrive/lib/SabreDAV-3.0.0/vendor/autoload.php';
-		}
-	}
-
+	public function __construct(swdrApp $swdrApp)
+    {
+        $this->setSwdrApp($swdrApp);
+        $this->pl = ilSWITCHdrivePlugin::getInstance();
+    }
 
 	protected function getSabreClient() {
 		if (!$this->sabre_client) {
