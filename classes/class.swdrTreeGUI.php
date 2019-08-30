@@ -24,6 +24,9 @@ class swdrTreeGUI extends ilTreeExplorerGUI{
 	    $this->setPreloadChilds(false);
 	    $this->setAjax(true);
 
+        // necessary from 5.4 to fix bug where only root node shows
+        $this->setNodeOpen('/');
+
 	    $this->log = $ilLog;
         $css =
             '.jstree a.clickable_node {

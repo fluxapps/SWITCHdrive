@@ -7,7 +7,7 @@ require_once('class.ilDynamicLanguage.php');
  *
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
-class ilSWITCHdrivePlugin extends ilCloudHookPlugin implements ilDynamicLanguageInterfaceOC{
+class ilSWITCHdrivePlugin extends ilCloudHookPlugin {
 
     const PLUGIN_NAME = 'SWITCHdrive';
 
